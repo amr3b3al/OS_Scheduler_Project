@@ -1,0 +1,15 @@
+C:\Users\amrmo\source\repos\OS_Scheduler_Project\CPU_Scheuler\bin\Debug\net6.0\CPU_Scheduler.exe
+C:\Users\amrmo\source\repos\OS_Scheduler_Project\CPU_Scheuler\bin\Debug\net6.0\CPU_Scheduler.deps.json
+C:\Users\amrmo\source\repos\OS_Scheduler_Project\CPU_Scheuler\bin\Debug\net6.0\CPU_Scheduler.runtimeconfig.json
+C:\Users\amrmo\source\repos\OS_Scheduler_Project\CPU_Scheuler\bin\Debug\net6.0\CPU_Scheduler.dll
+C:\Users\amrmo\source\repos\OS_Scheduler_Project\CPU_Scheuler\bin\Debug\net6.0\CPU_Scheduler.pdb
+C:\Users\amrmo\source\repos\OS_Scheduler_Project\CPU_Scheuler\obj\Debug\net6.0\CPU_Scheduler.csproj.AssemblyReference.cache
+C:\Users\amrmo\source\repos\OS_Scheduler_Project\CPU_Scheuler\obj\Debug\net6.0\CPU_Scheduler.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\amrmo\source\repos\OS_Scheduler_Project\CPU_Scheuler\obj\Debug\net6.0\CPU_Scheduler.AssemblyInfoInputs.cache
+C:\Users\amrmo\source\repos\OS_Scheduler_Project\CPU_Scheuler\obj\Debug\net6.0\CPU_Scheduler.AssemblyInfo.cs
+C:\Users\amrmo\source\repos\OS_Scheduler_Project\CPU_Scheuler\obj\Debug\net6.0\CPU_Scheduler.csproj.CoreCompileInputs.cache
+C:\Users\amrmo\source\repos\OS_Scheduler_Project\CPU_Scheuler\obj\Debug\net6.0\CPU_Scheduler.dll
+C:\Users\amrmo\source\repos\OS_Scheduler_Project\CPU_Scheuler\obj\Debug\net6.0\refint\CPU_Scheduler.dll
+C:\Users\amrmo\source\repos\OS_Scheduler_Project\CPU_Scheuler\obj\Debug\net6.0\CPU_Scheduler.pdb
+C:\Users\amrmo\source\repos\OS_Scheduler_Project\CPU_Scheuler\obj\Debug\net6.0\CPU_Scheduler.genruntimeconfig.cache
+C:\Users\amrmo\source\repos\OS_Scheduler_Project\CPU_Scheuler\obj\Debug\net6.0\ref\CPU_Scheduler.dll

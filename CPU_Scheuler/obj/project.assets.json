@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\amrmo\\source\\repos\\OS_Scheduler_Project\\CPU_Scheuler\\CPU_Scheuler.csproj",
-      "projectName": "CPU_Scheuler",
-      "projectPath": "C:\\Users\\amrmo\\source\\repos\\OS_Scheduler_Project\\CPU_Scheuler\\CPU_Scheuler.csproj",
+      "projectUniqueName": "C:\\Users\\amrmo\\source\\repos\\OS_Scheduler_Project\\CPU_Scheuler\\CPU_Scheduler.csproj",
+      "projectName": "CPU_Scheduler",
+      "projectPath": "C:\\Users\\amrmo\\source\\repos\\OS_Scheduler_Project\\CPU_Scheuler\\CPU_Scheduler.csproj",
       "packagesPath": "C:\\Users\\amrmo\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\amrmo\\source\\repos\\OS_Scheduler_Project\\CPU_Scheuler\\obj\\",
       "projectStyle": "PackageReference",

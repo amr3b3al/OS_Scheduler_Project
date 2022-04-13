@@ -1,5 +1,5 @@
 ﻿
-namespace CPU_Scheuler
+namespace CPU_Scheduler
 {
     public class SchedullingAlgorithm
     {

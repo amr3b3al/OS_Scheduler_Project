@@ -1,5 +1,5 @@
 ﻿
-
+using System.Text;
 namespace CPU_Scheduler
 {
     public class SJF : SchedullingAlgorithm
@@ -49,16 +49,19 @@ namespace CPU_Scheduler
                 Console.WriteLine("  "+p[min].getPid()+" : "+p[min].getCompletetionTime());
                 counter++;
             }
-           public static void schedule_prem(List<Process> p, int n)
+        }
+        public static float schedule_prem(List<Process> p, int n)
         {
+            string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "C:\\Users\\amrmo\\source\\repos\\OS_Scheduler_Project\\CPU_Scheuler\\gantt_input.txt");
+            StringBuilder ganttInput = new StringBuilder();
             float currentTime = p[0].getArrivalTime(); ;
             float nextArrivalTime = p[0].getArrivalTime();
-            //point to the end of the arrived processes
+            float TurnAroundTime = 0;
+            //point to the start and end of newely arrived processes
             int turn = 0;
             int left = 0;
-            //number of completed processes
-            int completed = 0;
-            //heap
+            int completed = 0; //track the number of processes that finished execution 
+            //heap that stores processes according to their burst time (lower on top)
             PriorityQueue<Process, float> priorityQueue = new PriorityQueue<Process, float>();
             Process currentRuning;
             //sort the processes according to their arrival time
@@ -87,6 +90,7 @@ namespace CPU_Scheduler
                         break;
                     } 
                     currentRuning = priorityQueue.Dequeue();
+                    ganttInput.Append(currentRuning.getPid() + "_" + currentTime + "_");
                     if ((currentRuning.getBurstTime()) > (nextArrivalTime - currentTime))
                     {
                         currentRuning.setBurstTime(currentRuning.getBurstTime() - (nextArrivalTime - currentTime));
@@ -96,23 +100,28 @@ namespace CPU_Scheduler
                     else
                     {
                         currentRuning.setCompletetionTime(currentRuning.getBurstTime()+currentTime);
+                        TurnAroundTime += (currentRuning.getCompletetionTime() - currentRuning.getArrivalTime());
                         completed++;
                         currentTime = currentRuning.getBurstTime() + currentTime;
                     }
+                    ganttInput.Append(currentTime + "\n");
                     
                 }
             }
             while (completed != n)
             {
                 currentRuning = priorityQueue.Dequeue();
+                ganttInput.Append(currentRuning.getPid() + "_" + currentTime + "_");
                 currentTime += currentRuning.getBurstTime();
                 currentRuning.setCompletetionTime(currentTime);
+                TurnAroundTime += (currentRuning.getCompletetionTime() - currentRuning.getArrivalTime());
                 completed++;
+                ganttInput.Append(currentTime + "\n");
             }
+            File.WriteAllText(path, ganttInput.ToString());
+
+            return TurnAroundTime;
         }
 
-
-
-        }
     }
 }

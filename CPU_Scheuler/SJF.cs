@@ -63,7 +63,7 @@ namespace CPU_Scheduler
             Process currentRuning;
             //sort the processes according to their arrival time
             p.Sort((x, y) => x.getArrivalTime().CompareTo(y.getArrivalTime()));
-            while (true)
+            while (turn < n)
             {
                 //exit loop with the last process that has the same arrival time
                 while (turn < n && nextArrivalTime == p[turn].getArrivalTime() )
@@ -100,10 +100,6 @@ namespace CPU_Scheduler
                         currentTime = currentRuning.getBurstTime() + currentTime;
                     }
                     
-                }
-                if (turn >= n)
-                {
-                    break;
                 }
             }
             while (completed != n)

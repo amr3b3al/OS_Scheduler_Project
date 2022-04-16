@@ -4,6 +4,15 @@ namespace CPU_Scheduler
 {
     public class SJF : SchedullingAlgorithm
     {
+        private static float computeTotalBurst(List<Process>p)
+        {
+            float totalBurst = 0;
+            for(int i = 0; i <p.Count;i++)
+            {
+                totalBurst=totalBurst+p[i].getBurstTime();
+            }
+            return totalBurst;  
+        }
         public static float schedule(List<Process> p, int n)
         {
             //sorting processes according to arrival time
@@ -22,7 +31,7 @@ namespace CPU_Scheduler
                     File.WriteAllText(path, ganttInput.ToString());
                     return totalWaitingTime / n;
                 }
-                float minB = 1000;
+                float minB = SJF.computeTotalBurst(p);
                 int min = 0;
                 int i = 0;
                 bool check = true;

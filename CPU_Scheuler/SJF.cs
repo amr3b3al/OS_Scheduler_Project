@@ -4,49 +4,60 @@ namespace CPU_Scheduler
 {
     public class SJF : SchedullingAlgorithm
     {
-        public static float schedule(List<Process> p,int n)
+        public static float schedule(List<Process> p, int n)
         {
             //sorting processes according to arrival time
             p.Sort((x, y) => x.getArrivalTime().CompareTo(y.getArrivalTime()));
-       
+            string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "C:\\Users\\amrmo\\source\\repos\\OS_Scheduler_Project\\CPU_Scheuler\\gantt_input.txt");
+            StringBuilder ganttInput = new StringBuilder();
             int counter = 0;
             float currentTime = 0;
             float totalWaitingTime = 0;
-            
+
             while (true)
             {
-                
-                if (counter == n) return totalWaitingTime/n;
-                float minB = 1000;
-                int min=0;
-                int i=0;
-                bool check = true;
-                for (i=0; i < n; i++)
+
+                if (counter == n)
                 {
-                    
-                    
-                    if(!(p[i].done)&&(p[i].getArrivalTime()<=currentTime))
+                    File.WriteAllText(path, ganttInput.ToString());
+                    return totalWaitingTime / n;
+                }
+                float minB = 1000;
+                int min = 0;
+                int i = 0;
+                bool check = true;
+                for (i = 0; i < n; i++)
+                {
+                    if (!(p[i].done) && (p[i].getArrivalTime() <= currentTime))
                     {
                         check = false;
-                        if(p[i].getBurstTime() <minB)
+                        if (p[i].getBurstTime() < minB)
                         {
-                            minB= p[i].getBurstTime();  
+                            minB = p[i].getBurstTime();
                             min = i;
                         }
-                        
                     }
-                   
                 }
-                if (check) {
-                    currentTime = currentTime + 1;
+                if (check)
+                {
+                    for(int j = 0; j < n; j++)
+                    {
+                        if (!p[j].done)
+                        {
+                            currentTime = p[j].getArrivalTime();
+                            break;
+                        }
+                    }
                     continue;
                 }
+                ganttInput.Append(p[min].getPid() + "_" + currentTime + "_");
                 currentTime = currentTime + p[min].getBurstTime();
+                ganttInput.Append(currentTime + "\n");
                 p[min].done = true;
                 p[min].setCompletetionTime(currentTime);
-                p[min].setWaitingTime(currentTime-(p[min].getArrivalTime()+p[min].getBurstTime()));
+                p[min].setWaitingTime(currentTime - (p[min].getArrivalTime() + p[min].getBurstTime()));
                 totalWaitingTime = totalWaitingTime + p[min].getWaitingTime();
-                Console.WriteLine("  "+p[min].getPid()+" : "+p[min].getCompletetionTime());
+                //Console.WriteLine("  " + p[min].getPid() + " : " + p[min].getCompletetionTime());
                 counter++;
             }
         }

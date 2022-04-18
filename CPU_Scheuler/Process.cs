@@ -2,7 +2,7 @@
 
 namespace CPU_Scheduler
 {
-    public class Process : IComparer<Process>
+    public class Process 
     {
        private int pid;
         private int priority;
@@ -31,12 +31,6 @@ namespace CPU_Scheduler
         public void setArrivalTime(float arrivalTime) { this.arrivalTime = arrivalTime; }   
         public void setBurstTime(float burstTime) { this.burstTime = burstTime; }
         public void setWaitingTime(float waitingTime) { this.waitingTime = waitingTime; }
-        public int Compare(Process p1, Process p2) {
-            if (p1.getBurstTime() > p2.getBurstTime()) { return 1; }
-            else if (p1.getBurstTime() < p2.getBurstTime()) { return -1; }
-            else { return 0; }  
-
-        }
         
     }
 }

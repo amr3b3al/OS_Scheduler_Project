@@ -58,17 +58,14 @@ namespace CPU_Scheduler
         public static float schedule_prem(List<Process> p, int n , bool type)
         {
             string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "gantt_input.txt");
-            StringBuilder ganttInput = new StringBuilder();
+            StringBuilder ganttInput = new();
             float TurnAroundTime = 0;
             //point to the start and end of newely arrived processes
             int turn = 0;
             int left = 0;
             int completed = 0; //track the number of processes that finished execution 
             //heap that stores processes according to their burst time (lower on top)
-
-            //PriorityQueue<Process, float> priorityQueue = new PriorityQueue<Process, float>();
             List<Process> priorityQueue = new();
-
             Process currentRuning;
             //sort the processes according to their arrival time
             p.Sort((x, y) => x.getArrivalTime().CompareTo(y.getArrivalTime()));
@@ -86,26 +83,8 @@ namespace CPU_Scheduler
                     nextArrivalTime = p[turn].getArrivalTime();
                 for (int i = left; i < turn; i++)
                 {
-                    priorityQueue.Add(p[i]);
-                    if (type)
-                    {
-                        priorityQueue.Sort((x, y) => x.getBurstTime().CompareTo(y.getBurstTime()));
-
-                    }
-                    else
-                    {
-                        priorityQueue.Sort((x, y) => x.getPriority().CompareTo(y.getPriority()));
-
-                    }
+                    Add(priorityQueue, p[i], type);
          
-                    //Priority Queue Code
-                    //if (type) {
-                    //    //priorityQueue.Enqueue(p[i], p[i].getBurstTime());
-                    //    Add(priorityQueue, p[i] , type );
-                    //}
-                    //else { 
-                    //    priorityQueue.Enqueue(p[i], p[i].getPriority());
-                    //}
                 }
                 left = turn;
 
@@ -119,41 +98,16 @@ namespace CPU_Scheduler
                         break;
                     }
 
-
                     //currentRuning = priorityQueue.Dequeue();
                     currentRuning = priorityQueue[0];
                     priorityQueue.RemoveAt(0);
-                    
 
                     //record the strating time of current process in a text file for drawing gantt chart
                     ganttInput.Append(currentRuning.getPid() + "_" + currentTime + "_");
                     if ((currentRuning.getBurstTime()) > (nextArrivalTime - currentTime))
                     {
                         currentRuning.setBurstTime(currentRuning.getBurstTime() - (nextArrivalTime - currentTime));
-                        
-
-                        //Add(priorityQueue, currentRuning, type);
-                        priorityQueue.Add(currentRuning);
-                        if (type)
-                        {
-                            priorityQueue.Sort((x, y) => x.getBurstTime().CompareTo(y.getBurstTime()));
-
-                        }
-                        else
-                        {
-                            priorityQueue.Sort((x, y) => x.getPriority().CompareTo(y.getPriority()));
-
-                        }
-                    
-                        //if (type) { 
-                        //    priorityQueue.Enqueue(currentRuning, currentRuning.getBurstTime());
-                        //}
-                        //else { 
-                        //    priorityQueue.Enqueue(currentRuning, currentRuning.getPriority());
-                        //}
-
-
-
+                        Add(priorityQueue, currentRuning, type);
                         currentTime = nextArrivalTime;
                     }
                     else
@@ -171,7 +125,6 @@ namespace CPU_Scheduler
             //run the rest of processes after they finish
             while (completed != n)
             {
-                //currentRuning = priorityQueue.Dequeue();
                 currentRuning = priorityQueue[0];
                 priorityQueue.RemoveAt(0);
                 ganttInput.Append(currentRuning.getPid() + "_" + currentTime + "_");
@@ -183,7 +136,7 @@ namespace CPU_Scheduler
                 ganttInput.Append(currentTime + "\n");
             }
 
-            Console.WriteLine(path);
+            //the path is in another directory
             File.WriteAllText(path, ganttInput.ToString());
 
             //divide the returned value by n to get avg

@@ -2,9 +2,10 @@
 
 namespace CPU_Scheduler
 {
-    public class Process
+    public class Process : IComparer<Process>
     {
        private int pid;
+        private int priority;
        public bool done;
        private float arrivalTime;
        private float burstTime;
@@ -18,16 +19,24 @@ namespace CPU_Scheduler
             this.burstTime = burst;
 
         }
+        public int getPriority() { return priority;}
         public int getPid() { return pid; }
         public float getArrivalTime() { return arrivalTime; }
         public float getBurstTime() { return burstTime; }
         public float getCompletetionTime() { return completetionTime; }
         public float getWaitingTime() { return waitingTime; } 
+        public void setPriority(int priority) { this.priority = priority; } 
         public void setCompletetionTime(float time) {this.completetionTime = time; }
         public void setPid(int pid) { this.pid = pid; }
         public void setArrivalTime(float arrivalTime) { this.arrivalTime = arrivalTime; }   
         public void setBurstTime(float burstTime) { this.burstTime = burstTime; }
         public void setWaitingTime(float waitingTime) { this.waitingTime = waitingTime; }
+        public int Compare(Process p1, Process p2) {
+            if (p1.getBurstTime() > p2.getBurstTime()) { return 1; }
+            else if (p1.getBurstTime() < p2.getBurstTime()) { return -1; }
+            else { return 0; }  
+
+        }
         
     }
 }
